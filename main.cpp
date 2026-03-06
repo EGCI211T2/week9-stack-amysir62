@@ -5,7 +5,7 @@ using namespace std;
 
 int main(int argc, char **argv){
     Stack s;
-     s.push(5);
+      s.push(5);
       s.push(1);
       s.push(7);
       s.pop();
@@ -14,13 +14,13 @@ int main(int argc, char **argv){
 
  /*
   Exercise 1*/
-    /*
+    
     int i;
     for(i=1;i<argc;i++){
-      //  if(  x)  s.pop();
+       if(strcmp(argv[i],"x"))
         else s.push(atoi(argv[i]));
     }
-     */
+     
 
 
 

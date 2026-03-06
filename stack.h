@@ -10,17 +10,19 @@ public:
     int pop();
     Stack();
     ~Stack();
+    bool isEmpty(){  return size==0; }
 };
 
+// [3,4,5]
 
 void Stack::push(int x){
   NodePtr new_node=new NODE(x);
   if(new_node){
-            // Left missing for exercises…
+            new_node->set_next(top);
+            top=new_node;
+            ++size;
    }
- 
-         // Left missing for exercises…
-    
+   else cout<<"No memory left"<<endl;
 }
 
 int Stack::pop(){
@@ -34,13 +36,15 @@ int Stack::pop(){
     }
 
 Stack::Stack(){
+      top=NULL;
+      size=0;
+
     //initialize stack
-    
+  
 }
 Stack::~Stack(){
     //delete all remaning stack (i.e. pop all) 
     
 }
-
 
 #endif
