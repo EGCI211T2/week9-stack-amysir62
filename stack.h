@@ -1,4 +1,3 @@
-
 #ifndef stack_h
 #define stack_h
 #include "node.h"
@@ -10,41 +9,48 @@ public:
     int pop();
     Stack();
     ~Stack();
-    bool isEmpty(){  return size==0; }
+    int get_size() {
+      return size;
+    }
 };
 
-// [3,4,5]
 
 void Stack::push(int x){
   NodePtr new_node=new NODE(x);
-  if(new_node){
-            new_node->set_next(top);
-            top=new_node;
-            ++size;
-   }
-   else cout<<"No memory left"<<endl;
+  if(!new_node){
+    return;
+  }
+  size++;
+  if (!top) {
+    top = new_node;
+    return;
+  }
+  new_node->set_next(top);
+  top = new_node;
 }
 
 int Stack::pop(){
-        NodePtr t=top;
-        int value;
-        value=t->get_value();
-    // Left missing part for exercises
-        delete t;
-        return value;
-	//be careful of the empty stack!!!
-    }
+  if (!top) {
+    return 0;
+    //throw exception(":((");
+  }
+  int val = top->get_value();
+  NodePtr tmp = top;
+  top = top->get_next();
+  delete tmp;
+  size -= 1;
+  return val;
+}
 
 Stack::Stack(){
-      top=NULL;
-      size=0;
-
-    //initialize stack
-  
+  top = NULL;
+  size = 0;
 }
 Stack::~Stack(){
-    //delete all remaning stack (i.e. pop all) 
-    
+  while (top) {
+    pop();
+  }
 }
+
 
 #endif

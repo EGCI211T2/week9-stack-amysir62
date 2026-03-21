@@ -1,47 +1,52 @@
-#include<iostream>
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+
 using namespace std;
 
 #include "stack.h"
 
-int main(int argc, char **argv){
-    Stack s;
-
-   
-/*
-  Exercise 2
- printf("Checking the parentheses in argv arguments\n");
-
-*/
-
-   int i=1;
-   char t;
-
-    int match=1;
-     for(j=0;j<strlen(argv[i]);j++){
-       switch(argv[i][j]){
-        case '[' :
-        case '(':
-        case '{': s.push(argv[i][j]; break;
-        case '}': t=s.pop();
-                  if(t!='{') match=0;
-                  break;
-        case '[' :t=s.pop();
-                  if(t!=']') match=0;
-                    break;
-        case '(' :t=s.pop();
-                  if(t!=')') match=0;
-                  break;
-       }
-       if(match==0) break;
+int check(char *st) {
+  Stack s;
+  int k = 0;
+  bool isvalid = true;
+  while (st[k] && isvalid) {
+    char c = st[k];
+    if (c == '(' || c == '{' || c == '[') {
+      s.push(c);
+    } else {
+      char k = s.pop();
+      if (
+        c == ')' && k != '(' ||
+        c == '}' && k != '{' ||
+        c == ']' && k != '['
+      ) {
+        isvalid = false;
+        break;
       }
-      if(match==0) cout<<"incorrect:mismatch";
-      else if(!s.isEmpty()) cout<< "incorrect: too many open parenthesis"<<endl;
-      else cout<<"correct"<<endl;
+    }
 
+    k++;
   }
+  int size = s.get_size();
+  if (size != 0) {
+    return 2;
+  }
+  return isvalid ? 1 : 0;
+}
 
+int main(int argc, char **argv){
+  for (int i = 1; i < argc; i++) {
+    int isvalid = check(argv[i]);
+    printf("argv %d ", i);
+    if (isvalid == 0) {
+      printf("incorrect\n");
+    } else if (isvalid == 1) {
+      printf("correct\n");
+    } else if (isvalid == 2) {
+      printf("incorrect too many open parentheses\n");
+    }
+  }
   
-
-
-   return 0;
+  return 0;
 }
