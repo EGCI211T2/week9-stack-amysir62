@@ -1,7 +1,10 @@
 #include<iostream>
+#include <cstring>
+#include <cstdlib>
 using namespace std;
 
 #include "stack.h"
+
 
 int main(int argc, char **argv){
     Stack s;
@@ -17,8 +20,11 @@ int main(int argc, char **argv){
     
     int i;
     for(i=1;i<argc;i++){
-       if(strcmp(argv[i],"x"))
-        else s.push(atoi(argv[i]));
+       if(strcmp(argv[i],"x")==0){
+        s.pop();
+       }else{
+          s.push(atoi(argv[i]));
+       }
     }
      
 
